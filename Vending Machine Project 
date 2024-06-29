@@ -1,0 +1,65 @@
+from tkinter import *
+
+drink_dict = {
+    1: ("Cocacola", 2000),
+    2: ("Sprite", 2000),
+    3: ("Cafe Americano", 3000),
+    4: ("Water", 1000),
+    5: ("Orange Juice", 2500)
+}
+
+balance = 0
+
+def insert_money():
+    global balance
+    try:
+        user_input = int(input_field.get())
+        balance += user_input
+        balance_label['text'] = f"Current balance: {balance}"
+        display_text = ''
+        for key, (name, price) in drink_dict.items():
+            display_text += f'{key}: {name} - {price}\n'
+        insert_label['text'] = display_text
+    except ValueError:
+        balance_label['text'] = "Please enter a valid amount."
+
+def purchase():
+    global balance
+    try:
+        user_choice = int(input_field.get())
+        if user_choice in drink_dict:
+            drink_name, drink_price = drink_dict[user_choice]
+            if balance >= drink_price:
+                balance -= drink_price
+                balance_label['text'] = f"Current balance: {balance}"
+                got_label['text'] = f"Got {drink_name}"
+            else:
+                got_label['text'] = "Not enough balance."
+        else:
+            got_label['text'] = "Invalid selection."
+    except ValueError:
+        got_label['text'] = "Please enter a valid selection."
+
+
+win = Tk()
+win.geometry("400x400")
+
+label = Label(win, text="Click below to insert money and display menu.")
+insert_label = Label(win, text="Insert Money")
+input_field = Entry(win)
+balance_label = Label(win, text="")
+got_label = Label(win, text="")
+insert_button = Button(win, text="Insert Money", command=insert_money)
+purchase_button = Button(win, text="Buy", command=purchase)
+
+
+label.pack()
+insert_label.pack()
+input_field.pack()
+balance_label.pack()
+got_label.pack()
+insert_button.pack()
+purchase_button.pack()
+
+
+win.mainloop()

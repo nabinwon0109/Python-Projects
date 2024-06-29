@@ -1,0 +1,59 @@
+import random
+from tkinter import*
+food_list=["Chicken","Pizza","Sandwich","Pasta","Sushi",
+           "Kimchi Fried Rice","Ramen","Bibimbap","Bulgogi","Salad",
+          "Curry","Jjajangmyeon","Mapo Tofu","Malatang"]
+def pick():
+    global label 
+    food=random.choice(food_list)
+    label["text"]= "You should try " + food + " today!"
+
+win = Tk()
+win.geometry("300x300")
+label= Label(win, text="Click button to get menu recommendation.")
+label.pack()
+button = Button(win,text="Get recommendations :)",command=pick)
+button.pack()
+
+win.mainloop()
+
+food_list = {"korean": ["Kimchi Fried Rice", "Bibimbap", "Bulgogi", "Fried Chicken"],
+             "chinese": ["Mapo Tofu", "Malatang", "Jjajangmyeon", "Sweet and sour pork", "Dimsum"],
+             "western": ["Pizza", "Sandwich", "Pasta", "Salad", "Burgers and Fries", "Beef Steak"],
+             "japanese": ["Sushi", "Ramen", "Curry", "Tendong", "Gyudon"],
+             "asian": ["Pho (Vietnamese rice noodle)", "Laksa Noodle", "Tom Yum Soup", "Nasi Goreng"]
+             }
+
+import random
+from tkinter import*
+def pick():
+    user_choice = input_field.get().lower()
+    if user_choice=="korean":
+        food=random.choice(food_list["korean"])
+    elif user_choice=="chinese":
+        food=random.choice(food_list["chinese"])
+    elif user_choice=="western":
+        food=random.choice(food_list["western"])
+    elif user_choice=="japanese":
+        food=random.choice(food_list["japanese"])
+    elif user_choice=="asian":
+        food=random.choice(food_list["asian"])
+    else:
+        label["text"] = "Hey! We don't have that in our menu."
+        return
+    label["text"]="You should try " + food + " today!"
+
+    
+
+
+win = Tk()
+win.geometry("350x350")
+label=Label(win, text="Enter your option for food and click the button.")
+food_options = Label(win, text="Options: Korean/Chinese/Western/Japanese/Asian")
+input_field = Entry(win)
+button=Button(win, text="Get reccomendations :)", command=pick)
+label.pack()
+food_options.pack()
+input_field.pack()
+button.pack()
+win.mainloop()
